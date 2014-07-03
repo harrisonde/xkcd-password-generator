@@ -10,7 +10,7 @@
 XKCD = {
 	// let's get this party started!
 	init:function(){
-		XKCD.get();
+		XKCD.get();	
 	},	
 	get: function(){
 		jQuery.ajax({
