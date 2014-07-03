@@ -1,0 +1,12 @@
+$maxPageWidth: 1000px;
+#pageWrapper{
+	 @include outer-container;
+	 max-width: $maxPageWidth;
+	 .submit{
+		 text-align: center;
+	 }
+	 .switch{
+		 display: table;
+	 }
+	 
+}
