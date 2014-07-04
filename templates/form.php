@@ -11,7 +11,7 @@
 	 */
 ?>		
 
-	<form method='POST' action='functions/logic.php'>
+	<form>
     	<div class="card">
 	        <div class="ribbon-wrapper">
             	<div class="ribbon">
@@ -83,7 +83,7 @@
 				</div>
 				<br>
 				<div class="submit">
-					<button>
+					<button id="generate" type="button">
 						Generate a password
 					</button>
 				</div>		

@@ -8,42 +8,77 @@
 */
 
 XKCD = {
-	// let's get this party started!
+	/*
+	* 	This is the fist process started during the inital of the xkcd password generator at
+	*	runtime. This process must be started when HTML-Document has completed loading ( e.g.,
+	*	document ready state).
+	*/
 	init:function(){
-		XKCD.get();	
-	},	
-	get: function(){
-		jQuery.ajax({
-			type: 'post',
-			url: window.location.origin+'/functions/logic.php', 				
-			success: function(endpointResponse) {
-				var json = jQuery.parseJSON(endpointResponse);
-				$('#password').text(json);
-			},
-			error:function (xhr, ajaxOptions, thrownError){   
-		       return thrownError;
-		    } 
-		});	
+		XKCD.communicate.post();	
+		XKCD.assignevent.button();
 	},
-	// query loqic for random password by posting form data
-	post: function(formdata){
-		jQuery.ajax({
-			type: 'post',
-			url: window.location.origin+'/functions/logic.php', 				
-			data: obj,
-			success: function(endpointResponse) {
-				var json = jQuery.parseJSON(endpointResponse);
-				jQuery('.sobrietyCalculator_TotalMessage').text(json.message_text);
-			},
-			error:function (xhr, ajaxOptions, thrownError){   
-		       return thrownError;
-		    } 
-		});
+	/*
+	*	This method allows JavaScript to react to HTML events - JavaScript is executed when a
+	*	particular event orrucrs. Events are bound to specifc event handlers at element level.		*
+	*/
+	assignevent: {
+		button: function(){
+			var buttonGenerate = $('#generate');
+			buttonGenerate.on('click', function(){
+				XKCD.communicate.post();	
+			});
+		}	
+	},
+	/* 
+	*	Series of methods to communicate with a server in the background, without interfering 	
+	*	with the current page state. Ajax ( Asynchronous JavaScript and XML ) is leveraged to 
+	*   asynchronously send and retrieve data from the server. This method will a. make client
+	*	-side request for a data without any arguments or b. make client-side request for data
+	*	with arguments. The server logic.php will evaluate and return appropriate data.
+	*/
+	communicate: {
+		get: function(){
+			XKCD.communicate.send('get');
+		},
+		post: function(){
+			var formdata = $('form').serialize();
+			XKCD.communicate.send('post', formdata);	
+		},
+		send: function(method, formdata){
+			var ajaxObject, fileLocation;
+			fileLocation = window.location.origin+'/functions/logic.php';
+			switch(method){
+				case 'get':
+					ajaxObject = {
+						type: 'post',
+						url: fileLocation, 				
+						success: function(response) {
+							console.log(response);
+							var json = $.parseJSON(response);
+							$('#password').text(json);
+						},
+						error:function (xhr, ajaxOptions, thrownError){   
+					       return thrownError;
+					    } 
+					}
+				break;
+				case 'post':
+					ajaxObject = {
+						type: 'post',
+						url: fileLocation, 				
+						data: formdata,
+						success: function(response) {
+							console.log(response);
+							var json = $.parseJSON(response);
+							$('#password').text(json);
+						},
+						error:function (xhr, ajaxOptions, thrownError){   
+					       return thrownError;
+					    } 
+					}
+				break;
+			}
+			jQuery.ajax(ajaxObject);	
+		}
 	}
-
 }
-// load
-jQuery(document).ready( function(){
-	// do not clobber 
-	XKCD.init();
-});

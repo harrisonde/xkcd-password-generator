@@ -20,6 +20,16 @@
 		<link href="css/styles.css" media="screen" rel="stylesheet" type="text/css">
 		<script src="js/vendor/jQuery-10.1.2.js" type="text/javascript"></script>
 		<script src="js/client.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			/*
+			 *	Client side JavaScript for use with our xkcd password generator. The init()
+			 * 	method must be executed when the DOM HTML completes loading.
+			 */
+			jQuery(document).ready( function(){
+				// do not clobber 
+				XKCD.init();
+			});
+		</script>
 	</head>
 	<body>
 		<section id="pageWrapper">
