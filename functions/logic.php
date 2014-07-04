@@ -14,7 +14,7 @@
 	 defaultsOverride();
    	 instantiateLexicon();
    	 engenderedPhrase();
-	 
+	 engenderedFormat();
 	 /* 
 	  *	Associative arrays are arrays that use named keys that you assign to them. Any data provided by the HTTP 
 	  *	POST aka user is an associative array.
@@ -124,9 +124,25 @@
 			array_push(globals::$phrase, globals::$dictionary[$index]);
 	 	}
 	 	  
-	 	 debuger( json_encode(globals::$phrase) );
    	}
    	
+   	// add all configuration options, loop defualts array modifing phrase array to reflect.
+   	function engenderedFormat()
+   	{
+	   	foreach(paramater::$_DEFAULTS as $s => $s_value)
+	   	{
+		   	switch($s) #manipulate the phrase array
+		   	{
+		   		case 'includeNumber':
+		   			$lastItem = end(globals::$phrase);# pointer to last item in array
+		   			globals::$phrase[sizeof(globals::$phrase) - 1] = $lastItem . rand(1, 9);
+		   		break;
+		   	}
+		   	// debuger( json_encode(globals::$phrase) );
+	   	}
+	
+	   	debuger( json_encode(globals::$phrase) );
+   	}
    	// devloper tools used to log out 	
 	function debuger($returnThis)
 	{
