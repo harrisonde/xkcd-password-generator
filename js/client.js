@@ -32,6 +32,8 @@ XKCD = {
 			var buttonGenerate = $('#generate');
 			buttonGenerate.on('click', function(){
 				XKCD.communicate.post();	
+				XKCD.assignevent.slide();
+				
 			});
 		},
 		label: function(){
@@ -46,6 +48,10 @@ XKCD = {
 					parent.siblings().removeClass('selected');
 				}
 			});
+		},
+		slide: function(){
+			$('body,html,document').animate({ scrollTop: 0 }, 1000, 'swing');
+			$('input#password').focus();
 		}	
 	},
 	/* 
@@ -60,7 +66,7 @@ XKCD = {
 			XKCD.communicate.send('get');
 		},
 		post: function(){
-			var formdata = $('form').serialize();
+			var formdata = $('form').not('input#password').serialize();
 			XKCD.communicate.send('post', formdata);	
 		},
 		send: function(method, formdata){
@@ -72,7 +78,7 @@ XKCD = {
 						type: 'post',
 						url: fileLocation, 				
 						success: function(response) {
-							$('#password').text(response);
+							$('input#password').val(response);
 						},
 						error:function (xhr, ajaxOptions, thrownError){   
 					       return thrownError;
@@ -85,7 +91,7 @@ XKCD = {
 						url: fileLocation, 				
 						data: formdata,
 						success: function(response) {
-							$('#password').text(response);
+							$('input#password').val(response);
 						},
 						error:function (xhr, ajaxOptions, thrownError){   
 					       return thrownError;

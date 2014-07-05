@@ -117,7 +117,7 @@
 
   &:hover {
     background-color: $card-hover-background;
-    
+    cursor: default;
     .card-image img {
       background: $card-image-hover-background;
     }

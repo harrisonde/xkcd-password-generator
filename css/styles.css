@@ -422,6 +422,19 @@ cite {
   #pageWrapper .switch {
     display: table; }
 
+#password {
+  border: 0 none;
+  min-height: 30px;
+  background: #fafafa;
+  text-align: center;
+  vertical-align: middle;
+  padding-bottom: 4px;
+  padding-top: 3px;
+  width: 100%; }
+
+#password:hover {
+  cursor: pointer; }
+
 .cards:after {
   content: "";
   display: table;
@@ -524,7 +537,8 @@ cite {
         display: block;
         font-weight: normal; }
   .card:hover {
-    background-color: white; }
+    background-color: white;
+    cursor: default; }
     .card:hover .card-image img {
       background: #e2d9ac; }
     .card:hover .card-header {

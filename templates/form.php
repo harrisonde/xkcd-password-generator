@@ -27,7 +27,7 @@
 	        <div class="card-copy">
             <p>The XKCD password generator strings together commonly used words in a random sequence. The goal is to create a unique password that is easy to recall from memory but difficult to guess.
 </p>
-            <div id="password"></div>
+            <input id="password"></input>
         </div>
 	        <div class="card-config-options">
 	        	<hr>	
