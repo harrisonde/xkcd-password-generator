@@ -53,9 +53,8 @@ XKCD = {
 						type: 'post',
 						url: fileLocation, 				
 						success: function(response) {
+							$('#password').text(response);
 							console.log(response);
-							var json = $.parseJSON(response);
-							$('#password').text(json);
 						},
 						error:function (xhr, ajaxOptions, thrownError){   
 					       return thrownError;
@@ -68,9 +67,8 @@ XKCD = {
 						url: fileLocation, 				
 						data: formdata,
 						success: function(response) {
+							$('#password').text(response);
 							console.log(response);
-							var json = $.parseJSON(response);
-							$('#password').text(json);
 						},
 						error:function (xhr, ajaxOptions, thrownError){   
 					       return thrownError;

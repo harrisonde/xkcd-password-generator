@@ -27,14 +27,14 @@
 	 // used to remember var’s value across multiple functions
 	 class globals 
 	 {	
-		static $debug = 'on';
+		static $debug = 'off';
 		static $dictionary = null;
 		static $phrase = array();
 		static $_CHR2NUM_FEW= 4;
 		static $_CHR2NUM_MORE= 6;
 		static $_CHR2NUM_LOADS= 9;
-		static $_CHR2NUM_OFF = 1;
-		static $_CHR2NUM_ON = 0;
+		static $_CHR2NUM_OFF = 0; #set this to 0 after dev
+		static $_CHR2NUM_ON = 1;
 		
 	 }
 	 
@@ -126,24 +126,90 @@
 	 	  
    	}
    	
-   	// add all configuration options, loop defualts array modifing phrase array to reflect.
+   	/*
+   	*	Format the phrase array to meet the confguration options found in the configuration array. Read in the default value(s) 
+   	*	checking each default with a switch statment and manipulate the phrase array value(s). 
+   	*/
    	function engenderedFormat()
    	{
-	   	foreach(paramater::$_DEFAULTS as $s => $s_value)
+   		
+	   	foreach(paramater::$_DEFAULTS as $s => $s_value) 
 	   	{
+	   		$lastItem = end(globals::$phrase);# pointer to last item in array, 
+		   	
 		   	switch($s) #manipulate the phrase array
 		   	{
 		   		case 'includeNumber':
-		   			$lastItem = end(globals::$phrase);# pointer to last item in array
-		   			globals::$phrase[sizeof(globals::$phrase) - 1] = $lastItem . rand(1, 9);
+		   			if($s_value == 1)
+		   			{
+		   				globals::$phrase[sizeof(globals::$phrase) - 1] = $lastItem . rand(1, 9);
+		   			}	
+		   		break;
+		   		case 'includeSpecialSymbol':
+		   			if($s_value == 1)
+		   			{
+			   			$count = 0;
+			   			$pharseLength = sizeof(globals::$phrase);
+			   			foreach(globals::$phrase as &$p_value) # pointer to array value, allows direct modification to said value.
+			   			{
+				   			if($count + 1 != $pharseLength) # do not add special char to list item
+				   			{
+					   			$p_value = $p_value . '-';
+					   			$count++;	
+				   			} 			   			
+			   			}
+			   		}	
+		   		break;
+		   		case 'specialCharacters':
+		   			$specialChar = makeRandomChar($s_value);
+		   			print_r($specialChar);
+		   			globals::$phrase[sizeof(globals::$phrase) - 1] = $lastItem . $specialChar;
+		   		break;
+		   		case 'capitalizeFirstLetter':
+		   			if($s_value == 1)
+		   			{
+			   			foreach(globals::$phrase as &$p_value) # loop the array, and modify the first character
+			   			{
+				   			$binary = decbin(ord($p_value)); # binary of the first character value.	 
+				   			$bit = $binary[2]; # the 5th bit denotes upper or lower case
+				   			if($bit !== 0) # do not convert if the bit is not 0 or off
+				   			{
+					   			$binary[1] = 0; #set 5th bit
+				   			}
+				   			$p_value[0] = chr(bindec($binary)); # binary converted char value
+			   			}
+		   			}
 		   		break;
 		   	}
-		   	// debuger( json_encode(globals::$phrase) );
 	   	}
-	
-	   	debuger( json_encode(globals::$phrase) );
+	   	if(paramater::$_DEFAULTS['includeSpecialSymbol'] === 1)
+	   	{
+		   	echo implode('', globals::$phrase);
+	   	}
+	   	else
+	   	{
+		   	echo implode(' ', globals::$phrase); 
+	   	}   
    	}
-   	// devloper tools used to log out 	
+
+   	/*
+   	 * Creat a randomn char (symbol) by providing optional number of [chars] to return. If no argument provided, one (1) char
+   	 *	will be returned by the function. 
+   	 */
+   	function makeRandomChar($charsBack)
+   	{
+	   	$tempStore = array(); # an array to hold all requested chars
+	   
+	   	for($k=0; $k < $charsBack; $k++)
+	   	{
+			$specialChar = array('~','!','@','#','$','%','^','&','*','(',')','+','=');
+		   	array_push($tempStore, $specialChar[array_rand($specialChar)] ); #picks one or more entries entries out of an array, and returns the key (or keys) of the random entries, key is passed and value is captured.
+	   	}
+		   	
+	   	return implode('',$tempStore); #join values with no space 
+   	}
+
+   	// devloper tools used to log out goodies from the script, no good in a production world. 	
 	function debuger($returnThis)
 	{
 		// debug, if required
