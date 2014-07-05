@@ -16,6 +16,7 @@ XKCD = {
 	init:function(){
 		XKCD.communicate.post();	
 		XKCD.assignevent.button();
+		XKCD.assignevent.label();
 	},
 	/*
 	*	This method allows JavaScript to react to HTML events - JavaScript is executed when a
@@ -26,6 +27,19 @@ XKCD = {
 			var buttonGenerate = $('#generate');
 			buttonGenerate.on('click', function(){
 				XKCD.communicate.post();	
+			});
+		},
+		label: function(){
+			$('[type="radio"]').on('click', function(){
+				var parent = $(this).parent();
+				var rdo = $(this);
+				if(parent.hasClass('selected')){
+					parent.removeClass('selected');
+					rdo.attr('checked', false);
+				}else{
+					parent.addClass('selected');
+					parent.siblings().removeClass('selected');
+				}
 			});
 		}	
 	},

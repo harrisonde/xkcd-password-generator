@@ -23,7 +23,7 @@ body:before {
   pointer-events: none;
   z-index: -1; }
 
-button, input[type="submit"], button, input[type="submit"] {
+button, input[type="submit"], button, input[type="submit"], label.button {
   -webkit-font-smoothing: antialiased;
   background-color: #477DCA;
   border-radius: 0.1875em;
@@ -34,7 +34,7 @@ button, input[type="submit"], button, input[type="submit"] {
   line-height: 1;
   padding: 0.75em 1em;
   text-decoration: none; }
-  button:hover, input[type="submit"]:hover, button:hover, input[type="submit"]:hover {
+  button:hover, input[type="submit"]:hover, button:hover, input[type="submit"]:hover, label.button:hover {
     background-color: #2c5999;
     color: white; }
 
@@ -636,3 +636,21 @@ cite {
   font-weight: 800;
   font-size: 1.2em;
   word-wrap: break-word; }
+
+label.button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap; }
+  label.button [type="radio"] {
+    display: none; }
+
+label.selected {
+  background-color: #2c5999;
+  color: white; }

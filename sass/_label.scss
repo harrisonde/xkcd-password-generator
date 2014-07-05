@@ -1,0 +1,17 @@
+label.button{
+  @extend %button;
+  @include appearance(none);
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  
+  [type="radio"]{
+	  display: none;
+  }
+}
+label.selected{
+	background-color: #2c5999;
+	color: white;
+}

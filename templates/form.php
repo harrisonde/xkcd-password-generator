@@ -33,13 +33,13 @@
 	        	<hr>	
 	        	<div class="radio-group">
 				  <h6>To get started, how many words should we use?</h6>
-				  <label>Few
+				  <label class="button">Few
 				  	<input type="radio" name="numberOfWords" value="few" checked="checked">
 				  </label>
-				   <label>More
+				   <label class="button">More
 				  	<input type="radio" name="numberOfWords" value="more">
 				  </label>
-				   <label>Loads
+				   <label class="button">Loads
 				  	<input type="radio" name="numberOfWords" value="loads">
 				  </label>
 				 </div>
@@ -71,13 +71,13 @@
 				</div>
 				<div class="radio-group">
 					<h6>How's about a we toss in special characters?</h6>
-					<label>Few
+					<label class="button">Few
 						<input type="radio" name="specialCharacters" value="few">
 					</label>
-					<label>More
+					<label class="button">More
 						<input type="radio" name="specialCharacters" value="more">
 					</label>
-					<label>Loads
+					<label class="button">Loads
 						<input type="radio" name="specialCharacters" value="loads">
 					</label>
 				</div>
