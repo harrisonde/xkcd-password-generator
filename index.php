@@ -34,7 +34,6 @@
 	<body>
 		<section id="pageWrapper">
 			<?php
-				 require('functions/logic.php');
 				 require('templates/form.php');
 				 require('templates/footer.php');
 			?>

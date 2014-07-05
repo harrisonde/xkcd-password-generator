@@ -33,7 +33,7 @@
 	        	<hr>	
 	        	<div class="radio-group">
 				  <h6>To get started, how many words should we use?</h6>
-				  <label class="button">Few
+				  <label class="button selected">Few
 				  	<input type="radio" name="numberOfWords" value="few" checked="checked">
 				  </label>
 				   <label class="button">More
@@ -90,11 +90,11 @@
 	        </div>
 	        <div class="card-stats">
 	            <ul>
-	                <li>98<span>Items</span></li>
+	                <li><?php $dictionaryLength = explode(',', file_get_contents( 'http://'. $_SERVER['HTTP_HOST'] . '/dictionary/a.txt')); echo sizeof($dictionaryLength) ?><span>Words</span></li>
 	
-	                <li>298<span>Things</span></li>
+	                <li id="gitFork"></li>
 	
-	                <li>923<span>Objects</span></li>
+	                <li id="gitHistory"></li>
 	            </ul>
 			</div>
 		</div>

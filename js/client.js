@@ -17,6 +17,11 @@ XKCD = {
 		XKCD.communicate.post();	
 		XKCD.assignevent.button();
 		XKCD.assignevent.label();
+		XKCD.github.respositiores = [{
+			repo:'xkcd-password-generator',
+			user:'harrisonde'
+		}]
+	XKCD.github.pull(XKCD.github.respositiores);
 	},
 	/*
 	*	This method allows JavaScript to react to HTML events - JavaScript is executed when a
@@ -68,7 +73,6 @@ XKCD = {
 						url: fileLocation, 				
 						success: function(response) {
 							$('#password').text(response);
-							console.log(response);
 						},
 						error:function (xhr, ajaxOptions, thrownError){   
 					       return thrownError;
@@ -82,7 +86,6 @@ XKCD = {
 						data: formdata,
 						success: function(response) {
 							$('#password').text(response);
-							console.log(response);
 						},
 						error:function (xhr, ajaxOptions, thrownError){   
 					       return thrownError;
@@ -92,5 +95,44 @@ XKCD = {
 			}
 			jQuery.ajax(ajaxObject);	
 		}
+	},
+	/*
+	*	Method uses github api to pull information from user defined repos at runtime. The
+	* 	method expects an array of repos.
+	*/
+	github:{
+		// add data to page
+		add: function(json){
+		 	var pustData = json.pushed_at.split('T')[0];
+		 	var forkData = json.forks_count;
+			var templateA = pustData+'<span>Pushed</span>';
+			var templateB = forkData+'<span>Forked</span>';
+			// add to DOM
+			$('#gitHistory').append(templateA);
+			$('#gitFork').append(templateB);
+			//window.git = json;	
+		},
+		// request data from github and retun as json
+		pull: function(repositories){
+			var i = 0;
+			for(repo in repositories){
+				junk = repositories;
+				var repo = repositories[i].repo;
+				var user = repositories[i].user;
+				// make ajax request for github data
+				$.ajax({
+					url: 'https://api.github.com/repos/'+user+'/'+repo,
+					dataType: 'json',
+					error: function(textStatus, errorThrown, jqXHR ){ 
+						return 'error pulling repository';						
+					},
+					type: "GET",
+					success: function(json){
+						XKCD.github.add(json);
+					}
+				});	
+				i++;
+			}
+		},
 	}
 }
