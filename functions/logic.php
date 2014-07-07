@@ -227,7 +227,6 @@
 		   		break;
 		   		case 'specialCharacters':
 		   			$specialChar = makeRandomChar($s_value);
-		   			print_r($specialChar);
 		   			globals::$phrase[sizeof(globals::$phrase) - 1] = $lastItem . $specialChar;
 		   		break;
 		   		case 'capitalizeFirstLetter':
