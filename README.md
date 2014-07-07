@@ -15,5 +15,17 @@ The application generates password phrases from an internal dictionary of words.
 ### User defined dictionary
 If specified by a modification of the form configuration, a custom dictionary can be created by scraping text from a webpage. To build said dictionary, a URL must be provided with a the protocol and fully qualified domain. If  a URL is not found an error is thrown.
 
+##User Interface
+### HTML, CSS, and JavaScript
+The applicaion is constructed with HTML5, CSS3 and JavaScript. All the really fancy goodies are driven by Bourbon, Neat, Bitters, and Refils. Big thanks to the thoughtbot for maintaining and funding the project. Don't know where the development community would be without folks like these!
+
+####Requirements
+The application is written to work with all modern browsers that enable support for HTML5 and CSS3. The following minimum requirements must be met for the application to run:
+
+*PHP 5.3.23 (min)
+*jQuery 10.1.2 (min)
+*HTML5
+*CSS3
+
 ## How can I use this in my project?
-Well, just get the project source and enjoy! 
+Well, get the project source and enjoy!
