@@ -10,12 +10,11 @@
 	 *
 	 */
 ?>		
-
 	<form>
     	<div class="card">
 	        <div class="ribbon-wrapper">
             	<div class="ribbon">
-                	FORK ME
+                	<a href="https://github.com/harrisonde/xkcd-password-generator/fork">FORK ME</a>
 				</div>
 			</div>
 	        <div class="card-image">
@@ -82,6 +81,25 @@
 					</label>
 				</div>
 				<br>
+				<div class="advanced">
+					<hr>
+					<div class="card-copy">
+					<p>The XKCD password generator can generate passwords from a unique dictionary list. Said list can be created by reading the text from a single web page. Optionally the list can be saved to a unique dicitoinary file for reuse.</p>
+				</div>
+					<div class="url">
+					<label>What webpage can I get for you?</label>
+					<input id="dictionaryUrl" name="dictionaryUrl"></input>	
+				</div>
+					<div class="switch">
+	        		<label>Should I save that list?</label>
+	        		<label class="label-switch">
+						<input type="checkbox" name="includeNumber" value="on"/>
+						<div class="checkbox"></div>
+					</label>
+				</div>
+					<hr>
+					<br>
+				</div>
 				<div class="submit">
 					<button id="generate" type="button">
 						Generate a password

@@ -92,6 +92,7 @@ XKCD = {
 						data: formdata,
 						success: function(response) {
 							$('input#password').val(response);
+							console.log(response);
 						},
 						error:function (xhr, ajaxOptions, thrownError){   
 					       return thrownError;

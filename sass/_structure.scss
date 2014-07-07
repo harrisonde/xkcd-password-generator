@@ -1,4 +1,5 @@
 $maxPageWidth: 1000px;
+$bottomPad: 4px;
 #pageWrapper{
 	 @include outer-container;
 	 max-width: $maxPageWidth;
@@ -16,11 +17,18 @@ $maxPageWidth: 1000px;
 	background: rgb(250, 250, 250);
 	text-align: center;
 	vertical-align: middle;
-	padding-bottom: 4px;
+	padding-bottom: $bottomPad;
 	padding-top: 3px;
 	width: 100%;
 }
 
 #password:hover{
 	cursor: pointer;
+}
+.url{
+	padding-bottom: $bottomPad;
+}
+#dictionaryUrl{
+	min-height: 30px;
+	width: 100%;
 }

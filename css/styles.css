@@ -435,6 +435,13 @@ cite {
 #password:hover {
   cursor: pointer; }
 
+.url {
+  padding-bottom: 4px; }
+
+#dictionaryUrl {
+  min-height: 30px;
+  width: 100%; }
+
 .cards:after {
   content: "";
   display: table;
@@ -650,6 +657,9 @@ cite {
   font-weight: 800;
   font-size: 1.2em;
   word-wrap: break-word; }
+
+.ribbon a {
+  color: #fff; }
 
 label.button {
   -webkit-appearance: none;

@@ -5,16 +5,15 @@
 	 * Harrison DeStefano
 	 * harrison.destefano@gmail.com
 	 *
-	 * This is the logic template file that  displays the form.
+	 * This is the logic template file that converts form data and returns a string.
 	 * Without this file all would be lost.
 	 *
 	 */
 	 
-	 associateFormData();
-	 defaultsOverride();
-   	 instantiateLexicon();
-   	 engenderedPhrase();
-	 engenderedFormat();
+	 // uncomment for development log - do not use in a production environment.
+	 //error_reporting(E_ALL);       # Report Errors, Warnings, and Notices
+	 //ini_set('display_errors', 1); # Display errors on page (instead of a log file)
+	 
 	 /* 
 	  *	Associative arrays are arrays that use named keys that you assign to them. Any data provided by the HTTP 
 	  *	POST aka user is an associative array.
@@ -52,6 +51,31 @@
 		 	'capitalizeFirstLetter' => 'off'); #arguments are "on" or "off"	
 	 }
 	 
+	 init();
+	 /*
+	 * 	Confirm if we need to build a dictioanry or use the built-in dictionary. The function will determine whether a 	
+	 *	dictionaryUrl is considered to be empty (false). The dictionaryUrl is removed from the defaults array after
+	 *	this function to keep things super clean.
+	 */
+	 function init()
+	 {
+	 	associateFormData();
+     	switch(post_set('dictionaryUrl'))
+     	{
+			case true: #dictionaryUrl is not empty
+				createLexicon();
+				defaultsOverride();
+				engenderedPhrase();
+			 	engenderedFormat();
+			break;
+			case false: # dictionaryUrl is empty
+			 	defaultsOverride();
+			 	instantiateLexicon();
+			 	engenderedPhrase();
+			 	engenderedFormat();
+			break;
+		 }
+	 }
 	 /*
 	  *	Compares the values of two arrays ($_FORMDATA && $_DEFAULTS), and returns the matches. Any match found in
    	  *	defaults will be replaced with value from HTTP POST. All string based values are replaced with the proper
@@ -92,7 +116,7 @@
    	}
    	
    	/*
-	 *	Store teh associative array of variables passed to script via HTTP POST as a static global.
+	 *	Store the associative array of variables passed to script via HTTP POST as a static global.
    	 */
    	function associateFormData()
    	{
@@ -100,19 +124,65 @@
    	}
    	
    	/*
+   	* 	Create new dictionary items by scraping raw HTML from a URL, tags are removed from said HTML, and manipulated
+   	*	into a comma seperate list. Optionally said list can be saved to a unique file for reuse. If URL is not found,
+   	*	throw error.
+   	*/
+   	function createLexicon(){
+	   	try
+	   	{
+			$html = file_get_contents(argument::$_FORMDATA['dictionaryUrl']); # returns html in a string		
+			if(!$html)
+			{
+				 throw new Exception('url is not valid.');
+			} 
+			else
+			{
+				$dom = new DOMDocument(); # XML documents through the DOM API with PHP 5.
+				$dom->loadHTML($html);#Load HTML from a string 
+				#DOMDocument throws warnings all over the place when it does. enjoy!
+				$body = $dom->getElementsByTagName('body');
+				foreach ($body as $body) {
+					# remove all special chars from body and replace
+					$clean = preg_replace('/[^A-Za-z0-9\-]/', ',', $body->nodeValue);
+					#turn it into an array
+					$clean = explode(',', $clean); 
+					$i = 0;
+					foreach($clean as &$clean_v)
+					{
+						if( strlen($clean_v) == 0)
+						{
+							unset($clean[$i]); #remove empty values
+						} 
+						else
+						{
+							$clean_v = strtolower($clean_v); #convert string to lower
+						}
+						$i++;
+					}
+					globals::$dictionary = $clean;
+				}
+				
+				//file_put_contents(); # write data to a file		
+			}
+	   	}
+	   	catch(Exception $e)
+	   	{
+		   echo 'Caught exception: ',  $e->getMessage(), "\n";
+	   	}
+   	}
+   	/*
    	 *	Build the array of strings (engligh words) by reading the contents of a file (dictioanry) into a string. Once the file
    	 *	is read, convert the string into an array (explode) and store said array as global variable.
    	 */
    	function instantiateLexicon()
    	{
-	   	
-	   	globals::$dictionary = explode(',', file_get_contents( 'http://'. $_SERVER['HTTP_HOST'] . '/dictionary/a.txt')); #the preferred way to read the contents of a file into a string.
-	   	
+		globals::$dictionary = explode(',', file_get_contents( 'http://'. $_SERVER['HTTP_HOST'] . '/dictionary/a.txt')); #the preferred way to read the contents of a file into a string.	 	
    	}
    	
    	/*
    	 *	Manifest pesudo-random collection of strings and store said phrase, according to arguments, as array. The collection is
-   	 *	picked via libc generator as part ot PHP's built-in array_rand() function. The results are stored as global.
+   	 *	picked via libc generator as part ot PHP's built-in array_rand() function. The results are stored as global. Option
    	 */
    	function engenderedPhrase()
    	{
@@ -193,7 +263,7 @@
    	}
 
    	/*
-   	 * Creat a randomn char (symbol) by providing optional number of [chars] to return. If no argument provided, one (1) char
+   	 * Get a randomn char (symbol) by providing optional number of [chars] to return. If no argument provided, one (1) char
    	 *	will be returned by the function. 
    	 */
    	function makeRandomChar($charsBack)
@@ -208,23 +278,21 @@
 		   	
 	   	return implode('',$tempStore); #join values with no space 
    	}
-
-   	// devloper tools used to log out goodies from the script, no good in a production world. 	
-	function debuger($returnThis)
-	{
-		// debug, if required
-		if(globals::$debug == 'on')
-		{
-			//R eport Errors, Warnings, and Notices
-			error_reporting(E_ALL);       
-			
-			//Display errors on page (instead of a log file)
-			ini_set('display_errors', 1); 
-			
-			// print the post data back to the screen, you can alos look at the devloper tools network pane.
-			print_r($returnThis);
-		}
-	}
    	
+   	/*
+   	*	Determine if a POST variable is set, return true or false as string.
+   	*/
+   	function post_set($variableName)
+   	{ 
+   		
+	   	$bool = (integer) strlen(argument::$_FORMDATA[$variableName]);
+	   	
+	   	if($bool > 0){
+		   	$bool = true;
+	   	} else{
+		   	$bool = false;
+	   	}	   
+	    return $bool;  	
+   	}
    	
 ?>		
