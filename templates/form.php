@@ -95,7 +95,7 @@
 					<div class="tooltip-item">
 						<input id="dictionaryUrl" name="dictionaryUrl"></input>	
 						<div class="tooltip">
-							<p>The provided URL must include the protocol, host, and resource.<br> Example: http://google.com</p>
+							<p>The provided URL must include the protocol, host, and resource.<br> Example: http://github.com</p>
 						</div>
 					</div>
 					<hr>
