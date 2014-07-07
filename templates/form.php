@@ -86,7 +86,7 @@
 				<div class="advanced">
 					<hr>
 					<div class="card-copy">
-					<p>The XKCD password generator can generate passwords from a unique dictionary list. Said list can be created by reading the text from a single web page. Optionally the list can be saved to a unique dicitoinary file for reuse.</p>
+					<p>The XKCD password generator can generate passwords from a unique dictionary list. Said list can be created by reading the text from a single web page.</p>
 				</div>
 					
 					</div>
