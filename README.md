@@ -22,10 +22,10 @@ The applicaion is constructed with HTML5, CSS3 and JavaScript. All the really fa
 ####Requirements
 The application is written to work with all modern browsers that enable support for HTML5 and CSS3. The following minimum requirements must be met for the application to run:
 
-*PHP 5.3.23 (min)
-*jQuery 10.1.2 (min)
-*HTML5
-*CSS3
+* PHP 5.3.23 (min)
+* jQuery 10.1.2 (min)
+* HTML5
+* CSS3
 
 ## How can I use this in my project?
 Well, get the project source and enjoy!
