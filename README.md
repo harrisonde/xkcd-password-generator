@@ -1,6 +1,7 @@
 # xkcd password generator
-![xkcd image](https://raw.githubusercontent.com/harrisonde/xkcd-password-generator/master/images/comic.png "xkcd")
-This is the main repository for all things xkcd - passwords. 
+This is the main repository for all things xkcd - passwords.
+
+![xkcd image](https://raw.githubusercontent.com/harrisonde/xkcd-password-generator/master/images/comic.png "xkcd") 
 
 ## What is an xkcd password generator?
 The [xkcd password generator](http://xkcd.com/936/) strings together commonly used words in a random sequence. The goal is to create a unique password that is easy to recall from memory but difficult to guess.
