@@ -1,6 +1,8 @@
 <?php
-/**
-	 * The footer template file 
+	/**
+	 *	xkcd password generator
+	 *	@package xkcd password generator
+	 *	Description: Create a unique password that is easy to recall from memory but difficult to guess.  
 	 *
 	 * Harrison DeStefano
 	 * harrison.destefano@gmail.com

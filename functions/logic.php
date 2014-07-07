@@ -1,6 +1,8 @@
 <?php
 	/**
-	 * The form logic file 
+	 *	xkcd password generator
+	 *	@package xkcd password generator
+	 *	Description: Create a unique password that is easy to recall from memory but difficult to guess.  
 	 *
 	 * Harrison DeStefano
 	 * harrison.destefano@gmail.com
@@ -125,8 +127,7 @@
    	
    	/*
    	* 	Create new dictionary items by scraping raw HTML from a URL, tags are removed from said HTML, and manipulated
-   	*	into a comma seperate list. Optionally said list can be saved to a unique file for reuse. If URL is not found,
-   	*	throw error.
+   	*	into a array. If URL is not found for has an issues returning data and error is thrown.
    	*/
    	function createLexicon(){
 	   	try
@@ -161,9 +162,7 @@
 						$i++;
 					}
 					globals::$dictionary = $clean;
-				}
-				
-				//file_put_contents(); # write data to a file		
+				}		
 			}
 	   	}
 	   	catch(Exception $e)

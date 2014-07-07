@@ -652,6 +652,56 @@ cite {
 .label-switch + input[disabled] {
   color: #ccc; }
 
+.tooltip-item {
+  position: relative;
+  margin-bottom: 1.5em; }
+  .tooltip-item:hover .tooltip {
+    opacity: 1;
+    visibility: visible; }
+  .tooltip-item .tooltip {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 50%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    bottom: 130%;
+    background-color: rgba(51, 51, 51, 0.9);
+    border-radius: 0.1875em;
+    color: white;
+    font-size: 0.9em;
+    line-height: 1.5em;
+    margin-left: -8em;
+    opacity: 0;
+    padding: 1em;
+    text-align: center;
+    visibility: hidden;
+    min-width: 16em;
+    z-index: 10;
+    top: auto;
+    height: 115px; }
+    .tooltip-item .tooltip p {
+      margin-bottom: 0; }
+    .tooltip-item .tooltip:after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -8px;
+      border: 8px solid transparent;
+      border-top-color: rgba(51, 51, 51, 0.9);
+      content: '';
+      pointer-events: none;
+      width: 1px;
+      bottom: -16px;
+      top: auto; }
+
 #password {
   color: #6f99d5;
   font-weight: 800;

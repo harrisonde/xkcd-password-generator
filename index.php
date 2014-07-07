@@ -1,11 +1,11 @@
 <?php
 	/**
-	 * The main template file 
+	 *	xkcd password generator
+	 *	@package xkcd password generator
+	 *	Description: Create a unique password that is easy to recall from memory but difficult to guess.  
 	 *
 	 * Harrison DeStefano
-	 * harrison.destefano@gmail.com
-	 *
-	 * Create a unique password that is easy to recall from memory but difficult to guess.  
+	 * harrison.destefano@gmail.com 
 	 *
 	 * This is the main template file that calls all the other files.
 	 * Without this file all would be lost.

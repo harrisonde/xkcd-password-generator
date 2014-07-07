@@ -1,6 +1,8 @@
 <?php
-/**
-	 * The form template file 
+	/**
+	 *	xkcd password generator
+	 *	@package xkcd password generator
+	 *	Description: Create a unique password that is easy to recall from memory but difficult to guess.  
 	 *
 	 * Harrison DeStefano
 	 * harrison.destefano@gmail.com
@@ -86,17 +88,16 @@
 					<div class="card-copy">
 					<p>The XKCD password generator can generate passwords from a unique dictionary list. Said list can be created by reading the text from a single web page. Optionally the list can be saved to a unique dicitoinary file for reuse.</p>
 				</div>
+					
+					</div>
 					<div class="url">
 					<label>What webpage can I get for you?</label>
-					<input id="dictionaryUrl" name="dictionaryUrl"></input>	
-				</div>
-					<div class="switch">
-	        		<label>Should I save that list?</label>
-	        		<label class="label-switch">
-						<input type="checkbox" name="includeNumber" value="on"/>
-						<div class="checkbox"></div>
-					</label>
-				</div>
+					<div class="tooltip-item">
+						<input id="dictionaryUrl" name="dictionaryUrl"></input>	
+						<div class="tooltip">
+							<p>The provided URL must include the protocol, host, and resource.<br> Example: http://google.com</p>
+						</div>
+					</div>
 					<hr>
 					<br>
 				</div>
