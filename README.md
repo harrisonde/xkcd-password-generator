@@ -1,5 +1,5 @@
 # xkcd password generator
-This is the main repository for all things xkcd - passwords.
+This is the main repository for all things xkcd - passwords. [See it here](http://p2.harrisondestefano.com)
 
 ![xkcd image](https://raw.githubusercontent.com/harrisonde/xkcd-password-generator/master/images/comic.png "xkcd")
 
